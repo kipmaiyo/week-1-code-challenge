@@ -1,33 +1,29 @@
 # **week-1-code-challenge**
-## *Prerequisite* 
-1. Create a repository on your GitHub account.
-2. Use JavaScript to wire down the solution.
-3. Push the solution to the above repository once done.
-4. Submit the repository link for grading.
-### N.B
-Ensure your repository has a well written README.
+## *Daniel Kiprop* 
+
+
+## Description
+This project involves use of javascript to perform three different task
+
 
 ### **Project discription**
+## Steps
+1. First clone the repository
+2. Open the terminal
+3. Run the command below to install any required appendencies
+   npm install
+4. Then run the command   
 
 ### Challenge 1: Student Grade Generator (Toy Problem) 
 
-Write a program that prompts the user to input student marks. The input should be between 0 and 100. Then output the correct grade as follows: 
-
-A > 79, B > 60 to 79, C > 59 to 49, D > 40 to 49, E > less 40.
+This program prompts the user to input student marks. The input should be between 0 and 100. Then output the correct grade.
 
 ### Challenge 2: Speed Detector (Toy Problem)
 
-Write a program that takes as input the speed of a car e.g 80. If the speed is less than 70, it should print “Ok”. Otherwise, for every 5 km/s above the speed limit (70), it should give the driver one demerit point and print the total number of demerit points.
-
-> #### *For example, if the speed is 80, it should print: “Points: 2”. If the driver gets more than 12 points, the function should print: “License suspended”.*
-
+This program checks the speed and If the speed is less than 70, it should print “Ok”. Otherwise, for every 5 km/s above the speed limit (70), it should give the driver one demerit point and print the total number of demerit points.
 ### Challenge 3: Net Salary Calculator (Toy Problem)
 
-Given the basic salary and benefits of an employee, write a program that would calculate the Payee Tax, NHIF, NSSF Deductions and net salary.
+This program checks the basic salary and benefits of an employee by calculating the Payee Tax, NHIF, NSSF Deductions and net salary.
 
-## N.B: 
-**(Use KRA, NHIF, and NSSF values provided in the link below.)**
-
-https://www.aren.co.ke/payroll/taxrates.htmLinks   
-
-https://www.kra.go.ke/en/individual/calculate-tax/calculating-tax/payeLinks 
+Licence 
+MIT 

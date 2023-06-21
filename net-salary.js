@@ -1,154 +1,85 @@
-//Yearly Tax rates 
+// //Yearly Tax rates 
 
-//  function calculateTaxRate(Annual Taxable Pay) {
+const prompt=require("prompt-sync")({sigint:true}); 
+const basicSalary = parseFloat(prompt("Enter the employee's basic salary:"));
+const benefits = parseFloat(prompt("Enter the employee's benefits:"));
 
-//     let Annual Taxable Pay = 120000;
+// KRA tax rates for 2023
+const incomeTaxBands = [
+  { lowerLimit: 0, upperLimit: 24999, taxRate: 0 },
+  { lowerLimit: 25000, upperLimit: 39999, taxRate: 10 },
+  { lowerLimit: 40000, upperLimit: 59999, taxRate: 15 },
+  { lowerLimit: 60000, upperLimit: 79999, taxRate: 20 },
+  { lowerLimit: 80000, upperLimit: 99999, taxRate: 25 },
+  { lowerLimit: 100000, upperLimit: Infinity, taxRate: 30 }
+];
 
- 
+// NHIF rates for 2023
+const nhifRates = [
+  { lowerLimit: 0, upperLimit: 5999, monthlyRate: 150 },
+  { lowerLimit: 6000, upperLimit: 7999, monthlyRate: 300 },
+  { lowerLimit: 8000, upperLimit: 11999, monthlyRate: 400 },
+  { lowerLimit: 12000, upperLimit: 14999, monthlyRate: 500 },
+  { lowerLimit: 15000, upperLimit: 19999, monthlyRate: 600 },
+  { lowerLimit: 20000, upperLimit: 24999, monthlyRate: 750 },
+  { lowerLimit: 25000, upperLimit: 29999, monthlyRate: 850 },
+  { lowerLimit: 30000, upperLimit: 34999, monthlyRate: 900 },
+  { lowerLimit: 35000, upperLimit: 39999, monthlyRate: 950 },
+  { lowerLimit: 40000, upperLimit: 44999, monthlyRate: 1000 },
+  { lowerLimit: 45000, upperLimit: 49999, monthlyRate: 1100 },
+  { lowerLimit: 50000, upperLimit: 59999, monthlyRate: 1200 },
+  { lowerLimit: 60000, upperLimit: 69999, monthlyRate: 1300 },
+  { lowerLimit: 70000, upperLimit: 79999, monthlyRate: 1400 },
+  { lowerLimit: 80000, upperLimit: 89999, monthlyRate: 1500 },
+  { lowerLimit: 90000, upperLimit: 99999, monthlyRate: 1600 },
+  { lowerLimit: 100000, upperLimit: 109999, monthlyRate: 1700 },
+  { lowerLimit: 110000, upperLimit: 119999, monthlyRate: 1800 },
+  { lowerLimit: 120000, upperLimit: 129999, monthlyRate: 1900 },
+  { lowerLimit: 130000, upperLimit: Infinity, monthlyRate: 2000 }
+];
 
-//     if (Annual Taxable Pay <= 288,000) {
+// NSSF rates for 2023
+const nssfRates = {
+  employee: 6,
+  employer: 6,
+  voluntary: 6
+};
+// Calculate gross pay
+const grossPay = basicSalary + benefits;
 
-//       rate = 10;
-
-//     } else if (Annual Taxable Pay >= 288,001 && Annual Taxable Pay <= 388,000) {
-
-//       rate = 25;
-
-//     } else if (Annual Taxable Pay > 388,000) {
-
-//       rate = 30;
-
-//     }
-
- 
-
-//     return rate;
-
-// console.log(rate(Annual Taxable Pay))
-
-
-
-
-// calculate total monthly tax rate
-function calculateTaxRate(monthlyTaxablePay) {
-    let rate = ();
-    if (monthlyTaxablePay <= 24000) {
-      rate = 10;
-    } 
-    else if (monthlyTaxablePay >= 24001 && monthlyTaxablePay <= 32333) {
-      rate = 25;
-    } else if (monthlyTaxablePay > 32333) {
-      rate = 30;
-    }
-    else{
-    return rate;
-    }
+// Calculate Payee Tax
+let payeeTax = 0;
+for (const band of incomeTaxBands) {
+  const taxableAmount = Math.min(band.upperLimit - band.lowerLimit, grossPay - band.lowerLimit);
+  if (taxableAmount <= 0) {
+    break;
   }
+  payeeTax += (taxableAmount * band.taxRate) / 100;
+}
 
-
-
-  //Finding the total relief range for market interest rate 
-function calculateReliefsAndAllowances(relief)
-Personal Relief <= 28,800	
-Insurance Relief <= 60,000
-Allowable Pension Fund Contribution <= 240,000
-Affordable Housing Relief <= 108,000
-Allowable Owner Occupier Interest <= 300,000
-Disability Exemption <= 1,800,000
-
-market interest rate = (rate*0.31)
-
-
-//calculating NHIF deductions from grosspay
-
-
-function calculateDeduction(grossPay) {
-    let deduction = 0;
-    if (grossPay > 5999 && grossPay <= 7999) {
-      deduction = 300;
-    } 
-    else if (grossPay >= 8000 && grossPay <= 11999) {
-      deduction = 400;
-    } 
-    else if (grossPay >= 12000 && grossPay <= 14999) {
-      deduction = 500;
-    } 
-    else if (grossPay >= 15000 && grossPay <= 19999) {
-      deduction = 600;
-    } 
-    else if (grossPay >= 20000 && grossPay <= 24999) {
-      deduction = 750;
-    } 
-    else if (grossPay >= 25000 && grossPay <= 29999) {
-      deduction = 850;
-    } 
-    else if (grossPay >= 30000 && grossPay <= 34999) {
-      deduction = 900;
-    } 
-    else if (grossPay >= 35000 && grossPay <= 39999) {
-      deduction = 950;
-    } 
-    else if (grossPay >= 40000 && grossPay <= 44999) {
-      deduction = 1000;
-    } 
-    else if (grossPay >= 45000 && grossPay <= 49999) {
-      deduction = 1100;
-    } 
-    else if (grossPay >= 50000 && grossPay <= 59999) {
-      deduction = 1200;
-    } 
-    else if (grossPay >= 60000 && grossPay <= 69999) {
-      deduction = 1300;
-    } 
-    else if (grossPay >= 70000 && grossPay <= 79999) {
-      deduction = 1400;
-    } 
-    else if (grossPay >= 80000 && grossPay <= 89999) {
-      deduction = 1500;
-    } 
-    else if (grossPay >= 90000 && grossPay <= 99999) {
-      deduction = 1600;
-    } 
-    else if (grossPay >= 100000) {
-      deduction = 1700;
-    }
-    return deduction;
+// Calculate NHIF deduction
+let nhifDeduction = 0;
+for (const rate of nhifRates) {
+  if (grossPay >= rate.lowerLimit && grossPay <= rate.upperLimit) {
+    nhifDeduction = rate.monthlyRate;
+    break;
   }
+}
 
- 
+// Calculate NSSF deduction
+const nssfDeduction = (nssfRates.employee / 100) * basicSalary;
 
-//   //NSSF
+// Calculate net salary
+const deductions = payeeTax + nhifDeduction + nssfDeduction;
+const netSalary = grossPay - deductions;
 
-  function calculatePensionablePayTier(pay) {
-    if (pay >= 6000){
-   return pay * 0.06
-    }else if(pay >= 6,001 && pay <= 18,000){
-        return pay * 0.06
-    }
+// Output results
+console.log(`Basic Salary: ${basicSalary}`);
+console.log(`Benefits: ${benefits}`);
+console.log(`Gross Pay: ${grossPay}`);
+console.log(`Payee Tax: ${payeeTax}`);
+console.log(`NHIF Deduction: ${nhifDeduction}`);
+console.log(`NSSF Deduction: ${nssfDeduction}`);
+console.log(`Deductions: ${deductions}`);
+console.log(`Net Salary: ${netSalary}`);
 
-  }
-
- 
-
-  //Calculating net salary using the above values and categories
-
-    function calculateNetSalary(salary, benefits){
-    let monthlyTaxablePay = salary
-    let deductTax = calculateTaxRate(monthlyTaxablePay)
-    let grossPay = salary - ((deductTax / 100) * salary)
-    let deductNhif = calculateDeduction(grossPay)
-    let pay = salary - ((deductTax / 100) * salary) - deductNhif
-    let deductNssf = calculatePensionablePayTier(pay)
-    let netSalaryCalculation = () =>{var netSalaryValue = (pay - deductNhif) ; return netSalaryValue}
-    let netSalary = netSalaryCalculation()
-    console.log(netSalary)
-    return netSalary
-    }
-
- 
-
- let salary = parseInt("7000")//input gross salsary
- let benefits = parseInt("800")// input benefits
- calculateNetSalary(salary, benefits)
-
- 
